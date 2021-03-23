@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_events">Events</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_birthdays">Birthdays</string>
+    <string name="menu_holidays">Holidays</string>
+    <string name="title_record">Title</string>
+    <string name="save_button">Save</string>
+    <string name="title_hint">Enter the title</string>
+    <string name="name_person_hint">Enter the name of person</string>
+    <string name="description_hint">Enter the description</string>
+    <string name="record_added">Record was add</string>
+    <string name="empty_event_view">There\'s nothing here yet</string>
+    <string name="save_settings">Save settings</string>
+    <string name="language_string">Language</string>
+    <string name="item_events">Event</string>
+    <string name="item_holidays">Holiday</string>
+    <string name="item_birthdays">Birthday</string>
+
+    <string-array name="name_type_events">
+        <item>Event</item>
+        <item>Holiday</item>
+        <item>Birthday</item>
+    </string-array>
+</resources>
