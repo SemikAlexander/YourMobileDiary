@@ -12,9 +12,8 @@ import com.example.mobilediary.SettingsActivity
 import com.example.mobilediary.database.AppDatabase
 import com.example.mobilediary.database.Event
 import com.example.mobilediary.startActivity
+import com.example.mobilediary.toast
 import com.example.mobilediary.ui.adapters.EventsCustomRecyclerAdapter
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListener {
     private lateinit var eventViewModel: EventViewModel
@@ -54,7 +53,6 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
         return root
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
     }
@@ -74,6 +72,6 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
     }
 
     override fun onItemClick(position: Int) {
-
+        toast(list[position].description)
     }
 }

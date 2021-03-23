@@ -7,17 +7,17 @@ import com.example.mobilediary.database.Holiday
 @Dao
 interface HolidayDAO {
     @Query("SELECT * FROM user_holidays")
-    fun getAllEvents(): List<Holiday>
+    fun getAllHolidays(): List<Holiday>
 
     @Query("SELECT * FROM user_holidays WHERE idHoliday = :id")
-    fun getEvent(id: Long): Holiday
+    fun getHoliday(id: Long): Holiday
 
     @Insert
-    fun insertEvent(vararg holiday: Holiday)
+    fun insertHoliday(vararg holiday: Holiday)
 
     @Update
-    fun updateEvent(holiday: Holiday)
+    fun updateHoliday(holiday: Holiday)
 
     @Delete
-    fun deleteEvent(vararg holiday: Holiday)
+    fun deleteHoliday(vararg holiday: Holiday)
 }

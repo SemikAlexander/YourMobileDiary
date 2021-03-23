@@ -22,4 +22,10 @@
         android:name="com.example.mobilediary.ui.birthday.BirthdayFragment"
         android:label="@string/menu_birthdays"
         tools:layout="@layout/fragment_birthdays" />
+
+    <fragment
+        android:id="@+id/nav_holidays"
+        android:name="com.example.mobilediary.ui.holidays.HolidaysFragment"
+        android:label="@string/menu_holidays"
+        tools:layout="@layout/fragment_holidays" />
 </navigation>

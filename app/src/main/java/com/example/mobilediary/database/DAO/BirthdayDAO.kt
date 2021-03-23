@@ -6,14 +6,14 @@ import com.example.mobilediary.database.Birthday
 @Dao
 interface BirthdayDAO {
     @Query("SELECT * FROM user_birthdays")
-    fun getAllEvents(): List<Birthday>
+    fun getAllBirthday(): List<Birthday>
 
     @Insert
-    fun insertEvent(vararg birthday: Birthday)
+    fun insertBirthday(vararg birthday: Birthday)
 
     @Update
-    fun updateEvent(birthday: Birthday)
+    fun updateBirthday(birthday: Birthday)
 
     @Delete
-    fun deleteEvent(vararg birthday: Birthday)
+    fun deleteBirthday(vararg birthday: Birthday)
 }

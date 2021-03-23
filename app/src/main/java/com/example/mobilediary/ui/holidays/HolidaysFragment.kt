@@ -1,4 +1,4 @@
-package com.example.mobilediary.ui.birthday
+package com.example.mobilediary.ui.holidays
 
 import android.os.Bundle
 import android.view.*
@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
 import com.example.mobilediary.SettingsActivity
 import com.example.mobilediary.database.AppDatabase
-import com.example.mobilediary.database.Birthday
+import com.example.mobilediary.database.Event
+import com.example.mobilediary.database.Holiday
 import com.example.mobilediary.startActivity
 import com.example.mobilediary.toast
-import com.example.mobilediary.ui.adapters.BirthdaysCustomRecyclerAdapter
+import com.example.mobilediary.ui.adapters.HolidaysCustomRecycleAdapter
+import com.example.mobilediary.ui.event.EventViewModel
 
-class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickListener {
-    private lateinit var birthdayViewModel: BirthdayViewModel
-    lateinit var list: List<Birthday>
+class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickListener {
+    private lateinit var holidayViewModel: EventViewModel
+    lateinit var list: List<Holiday>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,21 +28,21 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
     ): View? {
         setHasOptionsMenu(true)
 
-        birthdayViewModel =
-            ViewModelProvider(this).get(BirthdayViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_birthdays, container, false)
+        holidayViewModel =
+            ViewModelProvider(this).get(EventViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_holidays, container, false)
 
-        val eventRecyclerView: RecyclerView = root.findViewById(R.id.recycleViewBirthdays)
-        val imageView: ImageView = root.findViewById(R.id.imageViewBirthdays)
+        val eventRecyclerView: RecyclerView = root.findViewById(R.id.recycleViewHolidays)
+        val imageView: ImageView = root.findViewById(R.id.imageViewHolidays)
 
         eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val db = AppDatabase(requireContext())
 
-        list = db.birthdayUserDao().getAllBirthday()
+        list = db.holidayUserDao().getAllHolidays()
 
         if (list.count() > 0) {
-            eventRecyclerView.adapter = BirthdaysCustomRecyclerAdapter(list, this)
+            eventRecyclerView.adapter = HolidaysCustomRecycleAdapter(list, this)
             imageView.visibility = View.GONE
         }
         else{
@@ -72,6 +74,6 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
     }
 
     override fun onItemClick(position: Int) {
-        toast(list[position].namePerson)
+        toast(list[position].description)
     }
 }
