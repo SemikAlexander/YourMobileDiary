@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
 import com.example.mobilediary.SettingsActivity
 import com.example.mobilediary.database.AppDatabase
-import com.example.mobilediary.database.Event
 import com.example.mobilediary.database.Holiday
 import com.example.mobilediary.startActivity
 import com.example.mobilediary.toast

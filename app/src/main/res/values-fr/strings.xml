@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="nav_header_title">Studio Android</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="action_settings">Paramètre</string>
+
+    <string name="menu_home">Maison</string>
+    <string name="menu_events">Événement</string>
+    <string name="menu_gallery">Galerie</string>
+    <string name="menu_slideshow">Diaporama</string>
+    <string name="hello_blank_fragment">Bonjour fragment vierge</string>
+    <string name="menu_birthdays">Anniversaire</string>
+    <string name="menu_holidays">Vacances</string>
+    <string name="title_record">Intitulé</string>
+    <string name="save_button">Enregistrer</string>
+    <string name="title_hint">Entrez le titre</string>
+    <string name="name_person_hint">Entrez le nom de la personne</string>
+    <string name="description_hint">Entrez la description</string>
+    <string name="record_added">Record a été ajouter</string>
+    <string name="empty_event_view">Il y\\\'s encore rien ici</string>
+    <string name="save_settings">Enregistrer les paramètres</string>
+    <string name="language_string">Langue</string>
+    <string name="item_events">Événement</string>
+    <string name="item_birthdays">Anniversaire</string>
+    <string name="item_holidays">Vacances</string>
+
+    <string-array name="name_type_events">
+        <item>Événement</item>
+        <item>Vacances</item>
+        <item>Anniversaire</item>
+    </string-array>
+</resources>

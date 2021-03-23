@@ -7,6 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.mobilediary.database.AppDatabase
+import com.example.mobilediary.database.Birthday
+import com.example.mobilediary.database.Event
+import com.example.mobilediary.database.Holiday
 import com.example.mobilediary.databinding.ActivityAddBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,6 +18,7 @@ import java.util.*
 class AddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddBinding
 
+    private val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.US)
     private var dateAndTime = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +72,6 @@ class AddActivity : AppCompatActivity() {
                     }
                 }
             }
-            val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.US)
 
             dateTextView.text = sdf.format(Date())
 
@@ -89,7 +93,40 @@ class AddActivity : AppCompatActivity() {
             }
 
             saveButton.setOnClickListener {
-                val format = SimpleDateFormat("dd.MM.yyyy")
+                val db = AppDatabase(this@AddActivity)
+
+                val dateToUnix = SimpleDateFormat("dd.MM.yyyy").parse(dateTextView.text.toString())
+
+                var unixtime = dateToUnix.time / 1000
+
+                when (eventSpinner.selectedItemPosition) {
+                    0 -> {
+                        db.eventUserDao().insertEvent(
+                                Event(
+                                        title = titleEditText.text.toString(),
+                                        description =  descriptionEditText.text.toString(),
+                                        date = unixtime
+                                )
+                        )
+                    }
+                    1 -> {
+                        db.holidayUserDao().insertHoliday(
+                                Holiday(
+                                        title = titleEditText.text.toString(),
+                                        description =  descriptionEditText.text.toString(),
+                                        date = unixtime
+                                )
+                        )
+                    }
+                    2 -> {
+                        db.birthdayUserDao().insertBirthday(
+                                Birthday(
+                                        namePerson = titleEditText.text.toString(),
+                                        date = unixtime
+                                )
+                        )
+                    }
+                }
 
                 titleEditText.text.clear()
                 descriptionEditText.text.clear()

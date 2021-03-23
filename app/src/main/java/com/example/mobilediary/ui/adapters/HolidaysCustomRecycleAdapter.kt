@@ -25,7 +25,7 @@ class HolidaysCustomRecycleAdapter(private val values: List<Holiday>,
         holder.largeTextView?.text = values[position].title
 
         val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-        holder.smallTextView?.text = sdf.format(values[position].date)
+        holder.smallTextView?.text = sdf.format(Date(values[position].date * 1000))
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

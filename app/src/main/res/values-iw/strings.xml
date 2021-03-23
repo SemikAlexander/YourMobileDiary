@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">פתח מגירת ניווט</string>
+    <string name="navigation_drawer_close">סגור מגירת ניווט</string>
+    <string name="nav_header_title">סטודיו לאנדרואיד</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">כותרת ניווט</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="menu_home">ראשי</string>
+    <string name="menu_events">אירועים</string>
+    <string name="menu_gallery">גלריה</string>
+    <string name="menu_slideshow">מצגת שקופיות</string>
+    <string name="hello_blank_fragment">שלום שבר ריק</string>
+    <string name="menu_birthdays">ימי הולדת</string>
+    <string name="menu_holidays">חגים</string>
+    <string name="title_record">כותרת</string>
+    <string name="save_button">שמור</string>
+    <string name="title_hint">הזן את הכותרת</string>
+    <string name="name_person_hint">הזן את שם האדם</string>
+    <string name="description_hint">הזן את התיאור</string>
+    <string name="record_added">רשומה הוספה</string>
+    <string name="empty_event_view">אין כאן עדיין כלום.</string>
+    <string name="save_settings">שמור הגדרות</string>
+    <string name="language_string">שפה</string>
+    <string name="item_events">אירוע</string>
+    <string name="item_holidays">חג</string>
+    <string name="item_birthdays">יום הולדת</string>
+
+    <string-array name="name_type_events">
+        <item>אירוע</item>
+        <item>חג</item>
+        <item>יום הולדת</item>
+    </string-array>
+</resources>

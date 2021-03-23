@@ -31,7 +31,9 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val map = mapOf("Español" to "es", "English" to "en", "Русский" to "ru", "Français" to "fr", "Deutsch" to "de")
+        val map = mapOf("Español" to "es", "English" to "en", "Русский" to "ru",
+                        "Français" to "fr", "Deutsch" to "de", "Italian" to "it",
+                        "Ελληνική" to "el", "العربية" to "ar", "עברית" to "iw", "中文" to "zh")
         val values = map.values.toList()
         val keys = map.keys
 

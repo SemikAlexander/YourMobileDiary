@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">Ανοίξτε το συρτάρι πλοήγησης</string>
+    <string name="navigation_drawer_close">Κλείσιμο συρταριού πλοήγησης</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Κεφαλίδα πλοήγησης</string>
+    <string name="action_settings">Ρυθμίσεων</string>
+    <string name="menu_home">Σπίτι</string>
+    <string name="menu_events">Συμβάντα</string>
+    <string name="menu_gallery">Συλλογή</string>
+    <string name="menu_slideshow">Προβολή διαφανειών</string>
+    <string name="hello_blank_fragment">Γεια κενό κομμάτι</string>
+    <string name="menu_birthdays">Γενεθλίων</string>
+    <string name="menu_holidays">Διακοπές</string>
+    <string name="title_record">Τίτλος</string>
+    <string name="save_button">Αποθηκεύσετε</string>
+    <string name="title_hint">Εισάγετε τον τίτλο</string>
+    <string name="name_person_hint">Εισάγετε το όνομα του ατόμου</string>
+    <string name="description_hint">Εισάγετε την περιγραφή</string>
+    <string name="record_added">Εγγραφή ήταν προσθέσετε</string>
+    <string name="empty_event_view">Δεν υπάρχει τίποτα εδώ ακόμα</string>
+    <string name="save_settings">Αποθήκευση Ρυθμίσεων</string>
+    <string name="language_string">Γλώσσα</string>
+    <string name="item_events">Συμβάν</string>
+    <string name="item_holidays">Διακοπές</string>
+    <string name="item_birthdays">Γενεθλίων</string>
+
+    <string-array name="name_type_events">
+        <item>Συμβάν</item>
+        <item>Διακοπές</item>
+        <item>Γενεθλίων</item>
+    </string-array>
+</resources>

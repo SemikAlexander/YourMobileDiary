@@ -3,7 +3,6 @@ package com.example.mobilediary.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
@@ -26,7 +25,7 @@ class EventsCustomRecyclerAdapter(private val values: List<Event>,
         holder.largeTextView?.text = values[position].title
 
         val sdf = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-        holder.smallTextView?.text = sdf.format(values[position].date)
+        holder.smallTextView?.text = sdf.format(Date(values[position].date * 1000))
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

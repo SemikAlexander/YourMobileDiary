@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">导航标题</string>
+    <string name="action_settings">设置</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_events">活动</string>
+    <string name="menu_gallery">画廊</string>
+    <string name="menu_slideshow">幻灯片</string>
+    <string name="hello_blank_fragment">你好空白片段</string>
+    <string name="menu_birthdays">生日</string>
+    <string name="menu_holidays">假期</string>
+    <string name="title_record">标题</string>
+    <string name="save_button">保存</string>
+    <string name="title_hint">输入标题</string>
+    <string name="name_person_hint">输入人员姓名</string>
+    <string name="description_hint">输入说明</string>
+    <string name="record_added">记录被添加</string>
+    <string name="empty_event_view">这里什么都没有</string>
+    <string name="save_settings">保存设置</string>
+    <string name="language_string">语言</string>
+    <string name="item_events">活动</string>
+    <string name="item_holidays">假日</string>
+    <string name="item_birthdays">生日</string>
+
+    <string-array name="name_type_events">
+        <item>活动</item>
+        <item>假日</item>
+        <item>生日</item>
+    </string-array>
+</resources>

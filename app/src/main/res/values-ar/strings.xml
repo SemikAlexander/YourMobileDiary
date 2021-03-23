@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobileDiary</string>
+    <string name="navigation_drawer_open">فتح درج التنقل</string>
+    <string name="navigation_drawer_close">إغلاق درج التنقل</string>
+    <string name="nav_header_title">أندرويد ستوديو</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">الملاحة رأس</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="menu_home">الصفحة الرئيسية</string>
+    <string name="menu_events">الأحداث</string>
+    <string name="menu_gallery">معرض الصور</string>
+    <string name="menu_slideshow">عرض الشرائح</string>
+    <string name="hello_blank_fragment">مرحبا جزء فارغ</string>
+    <string name="menu_birthdays">أعياد الميلاد</string>
+    <string name="menu_holidays">العطل</string>
+    <string name="title_record">العنوان</string>
+    <string name="save_button">حفظ</string>
+    <string name="title_hint">أدخل عنوان</string>
+    <string name="name_person_hint">أدخل اسم الشخص</string>
+    <string name="description_hint">أدخل الوصف</string>
+    <string name="record_added">تم إضافة سجل</string>
+    <string name="empty_event_view">لا يوجد شيء هنا بعد</string>
+    <string name="save_settings">حفظ الإعدادات</string>
+    <string name="language_string">اللغة</string>
+    <string name="item_events">الحدث</string>
+    <string name="item_holidays">عطلة</string>
+    <string name="item_birthdays">عيد ميلاد</string>
+
+    <string-array name="name_type_events">
+        <item>الحدث</item>
+        <item>عطلة</item>
+        <item>عيد ميلاد</item>
+    </string-array>
+</resources>
