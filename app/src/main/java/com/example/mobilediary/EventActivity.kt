@@ -104,37 +104,40 @@ class EventActivity : AppCompatActivity() {
 
                 val dateToUnix = SimpleDateFormat("dd.MM.yyyy").parse(dateTextView.text.toString())
 
-                var unixtime = dateToUnix.time / 1000
+                val unixtime = dateToUnix.time / 1000
 
-                when (eventSpinner.selectedItemPosition) {
-                    0 -> {
-                        db.eventUserDao().insertEvent(
-                            Event(
-                                title = titleEditText.text.toString(),
-                                description = descriptionEditText.text.toString(),
-                                date = unixtime
+                if (titleEditText.text.toString().trim().isNotEmpty() &&
+                    descriptionEditText.text.toString().trim().isNotEmpty()
+                ) {
+                    when (eventSpinner.selectedItemPosition) {
+                        0 -> {
+                            db.eventUserDao().insertEvent(
+                                Event(
+                                    title = titleEditText.text.toString(),
+                                    description = descriptionEditText.text.toString(),
+                                    date = unixtime
+                                )
                             )
-                        )
-                    }
-                    1 -> {
-                        db.holidayUserDao().insertHoliday(
-                            Holiday(
-                                title = titleEditText.text.toString(),
-                                description = descriptionEditText.text.toString(),
-                                date = unixtime
+                        }
+                        1 -> {
+                            db.holidayUserDao().insertHoliday(
+                                Holiday(
+                                    title = titleEditText.text.toString(),
+                                    description = descriptionEditText.text.toString(),
+                                    date = unixtime
+                                )
                             )
-                        )
-                    }
-                    2 -> {
-                        db.birthdayUserDao().insertBirthday(
-                            Birthday(
-                                namePerson = titleEditText.text.toString(),
-                                date = unixtime
+                        }
+                        2 -> {
+                            db.birthdayUserDao().insertBirthday(
+                                Birthday(
+                                    namePerson = titleEditText.text.toString(),
+                                    date = unixtime
+                                )
                             )
-                        )
+                        }
                     }
                 }
-
                 titleEditText.text.clear()
                 descriptionEditText.text.clear()
                 dateTextView.text = sdf.format(Date())

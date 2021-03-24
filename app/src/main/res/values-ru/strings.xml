@@ -33,4 +33,6 @@
         <item>Праздник</item>
         <item>День рождения</item>
     </string-array>
+    <string name="name_app">Мобильный дневник</string>
+    <string name="description_app">Не теряйте важные мгновения!</string>
 </resources>

@@ -32,4 +32,6 @@
         <item>חג</item>
         <item>יום הולדת</item>
     </string-array>
+    <string name="name_app">יומן נייד</string>
+    <string name="description_app">אל תבזבזו רגעים חשובים!</string>
 </resources>

@@ -33,4 +33,6 @@
         <item>Vacances</item>
         <item>Anniversaire</item>
     </string-array>
+    <string name="name_app">Journal mobile</string>
+    <string name="description_app">Ne perdez pas de moments importants!</string>
 </resources>

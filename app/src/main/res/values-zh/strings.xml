@@ -32,4 +32,6 @@
         <item>假日</item>
         <item>生日</item>
     </string-array>
+    <string name="name_app">手机日记</string>
+    <string name="description_app">不要浪费重要的时刻！</string>
 </resources>

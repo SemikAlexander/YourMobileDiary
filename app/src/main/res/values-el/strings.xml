@@ -32,4 +32,6 @@
         <item>Διακοπές</item>
         <item>Γενεθλίων</item>
     </string-array>
+    <string name="name_app">Κινητό ημερολόγιο</string>
+    <string name="description_app">Μην χάσετε σημαντικές στιγμές!</string>
 </resources>

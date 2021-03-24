@@ -26,10 +26,12 @@
     <string name="item_events">Event</string>
     <string name="item_holidays">Holiday</string>
     <string name="item_birthdays">Birthday</string>
+    <string name="name_app">Mobile diary</string>
 
     <string-array name="name_type_events">
         <item>Event</item>
         <item>Holiday</item>
         <item>Birthday</item>
     </string-array>
+    <string name="description_app">Don\'t waste important moments!</string>
 </resources>

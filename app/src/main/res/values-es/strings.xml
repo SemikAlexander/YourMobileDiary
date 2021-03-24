@@ -33,4 +33,6 @@
         <item>Vacaciones</item>
         <item>Cumpleaños</item>
     </string-array>
+    <string name="name_app">Diario móvil</string>
+    <string name="description_app">¡No pierdas momentos importantes!</string>
 </resources>
