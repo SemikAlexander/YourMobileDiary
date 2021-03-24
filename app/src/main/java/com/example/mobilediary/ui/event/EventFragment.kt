@@ -1,11 +1,13 @@
 package com.example.mobilediary.ui.event
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
 import com.example.mobilediary.SettingsActivity
@@ -28,12 +30,16 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
 
         eventViewModel =
             ViewModelProvider(this).get(EventViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_events, container, false)
 
-        val eventRecyclerView: RecyclerView = root.findViewById(R.id.recycleViewEvents)
-        val imageView: ImageView = root.findViewById(R.id.imageView1)
+        return inflater.inflate(R.layout.fragment_events, container, false)
+    }
 
-        eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    override fun onStart() {
+        super.onStart()
+        setHasOptionsMenu(true)
+
+        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewEvents)
+        val imageView: ImageView = requireView().findViewById(R.id.imageView1)
 
         val db = AppDatabase(requireContext())
 
@@ -42,23 +48,12 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
         if (list.count() > 0) {
             eventRecyclerView.adapter = EventsCustomRecyclerAdapter(list, this)
             imageView.visibility = View.GONE
-        }
-        else{
+        } else {
             imageView.visibility = View.VISIBLE
             eventRecyclerView.visibility = View.GONE
 
             imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
         }
-
-        return root
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

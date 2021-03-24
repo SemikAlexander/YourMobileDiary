@@ -3,17 +3,17 @@ package com.example.mobilediary
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.edit
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            startActivity<AddActivity>()
+            startActivity<EventActivity>()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         val isNeedRecreate = pref.getBoolean("is_need_recreate", false)
 
         if (isNeedRecreate) {
-            pref.edit {putBoolean("is_need_recreate", false) }
+            pref.edit { putBoolean("is_need_recreate", false) }
             recreate()
         }
     }

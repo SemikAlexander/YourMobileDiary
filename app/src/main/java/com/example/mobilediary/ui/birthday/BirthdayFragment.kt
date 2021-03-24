@@ -1,7 +1,10 @@
 package com.example.mobilediary.ui.birthday
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -28,10 +31,15 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
 
         birthdayViewModel =
             ViewModelProvider(this).get(BirthdayViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_birthdays, container, false)
+        return inflater.inflate(R.layout.fragment_birthdays, container, false)
+    }
 
-        val eventRecyclerView: RecyclerView = root.findViewById(R.id.recycleViewBirthdays)
-        val imageView: ImageView = root.findViewById(R.id.imageViewBirthdays)
+    override fun onResume() {
+        super.onResume()
+        setHasOptionsMenu(true)
+
+        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewBirthdays)
+        val imageView: ImageView = requireView().findViewById(R.id.imageViewBirthdays)
 
         eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -49,16 +57,6 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
 
             imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
         }
-
-        return root
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

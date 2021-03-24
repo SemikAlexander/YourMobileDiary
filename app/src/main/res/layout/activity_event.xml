@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
+    tools:context=".EventActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_event_activity"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/Theme.MobileDiary.PopupOverlay"
+        app:titleTextColor="@color/white" />
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginRight="121dp"
+        android:background="@drawable/border"
+        android:hint="@string/title_hint" />
+
+    <Spinner
+        android:id="@+id/eventSpinner"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginRight="16dp"
+        android:entries="@array/name_type_events"
+        android:gravity="center_horizontal"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="29.01.2021"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/descriptionEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/description_hint"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="280dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="?attr/colorOnSecondary"
+        android:stateListAnimator="@null"
+        android:text="@string/save_button"
+        android:textColor="?attr/colorSecondaryVariant" />
+
+</RelativeLayout>
