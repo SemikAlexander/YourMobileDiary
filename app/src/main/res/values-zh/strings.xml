@@ -34,4 +34,5 @@
     </string-array>
     <string name="name_app">手机日记</string>
     <string name="description_app">不要浪费重要的时刻！</string>
+    <string name="record_removed">记录被删除！</string>
 </resources>

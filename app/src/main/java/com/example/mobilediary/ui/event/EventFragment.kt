@@ -69,4 +69,33 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
     override fun onItemClick(position: Int) {
         toast(list[position].description)
     }
+
+    override fun onDeleteClick(position: Int) {
+        val db = AppDatabase(requireContext())
+        db.eventUserDao().deleteEvent(
+                Event(idEvent = list[position].idEvent,
+                        title = list[position].title,
+                        description = list[position].description,
+                        date = list[position].date)
+        )
+
+        setHasOptionsMenu(true)
+
+        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewEvents)
+        val imageView: ImageView = requireView().findViewById(R.id.imageView1)
+
+        list = db.eventUserDao().getAllEvents()
+
+        if (list.count() > 0) {
+            eventRecyclerView.adapter = EventsCustomRecyclerAdapter(list, this)
+            imageView.visibility = View.GONE
+        } else {
+            imageView.visibility = View.VISIBLE
+            eventRecyclerView.visibility = View.GONE
+
+            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
+        }
+
+        toast(getString(R.string.record_removed))
+    }
 }

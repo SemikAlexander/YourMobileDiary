@@ -23,6 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:itemCount="3"
+        android:longClickable="true"
         tools:listitem="@layout/recycleview_item" />
 
     <ImageView

@@ -3,6 +3,7 @@ package com.example.mobilediary.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
@@ -28,15 +29,24 @@ class EventsCustomRecyclerAdapter(private val values: List<Event>,
         holder.smallTextView?.text = sdf.format(Date(values[position].date * 1000))
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+            View.OnClickListener {
         var largeTextView: TextView? = null
         var smallTextView: TextView? = null
+        var imageViewRV: ImageView = itemView.findViewById(R.id.imageViewRV)
 
         init {
             largeTextView = itemView.findViewById(R.id.textViewLarge)
             smallTextView = itemView.findViewById(R.id.textViewSmall)
 
             itemView.setOnClickListener(this)
+
+            imageViewRV.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onDeleteClick(position)
+                }
+            }
         }
 
         override fun onClick(v: View?) {
@@ -49,5 +59,6 @@ class EventsCustomRecyclerAdapter(private val values: List<Event>,
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+        fun onDeleteClick(position: Int)
     }
 }

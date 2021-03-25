@@ -34,4 +34,5 @@
     </string-array>
     <string name="name_app">المحمول يوميات</string>
     <string name="description_app">لا تضيع لحظات هامة!</string>
+    <string name="record_removed">تمت إزالة السجل!</string>
 </resources>

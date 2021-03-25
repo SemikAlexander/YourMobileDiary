@@ -35,4 +35,5 @@
     </string-array>
     <string name="name_app">Journal mobile</string>
     <string name="description_app">Ne perdez pas de moments importants!</string>
+    <string name="record_removed">Record a été supprimé!</string>
 </resources>

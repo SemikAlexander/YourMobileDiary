@@ -35,4 +35,5 @@
     </string-array>
     <string name="name_app">Мобильный дневник</string>
     <string name="description_app">Не теряйте важные мгновения!</string>
+    <string name="record_removed">Запись была удалена!</string>
 </resources>

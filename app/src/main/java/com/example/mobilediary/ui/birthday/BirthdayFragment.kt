@@ -23,19 +23,19 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
     lateinit var list: List<Birthday>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
 
         birthdayViewModel =
-            ViewModelProvider(this).get(BirthdayViewModel::class.java)
+                ViewModelProvider(this).get(BirthdayViewModel::class.java)
         return inflater.inflate(R.layout.fragment_birthdays, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         setHasOptionsMenu(true)
 
         val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewBirthdays)
@@ -71,5 +71,33 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
 
     override fun onItemClick(position: Int) {
         toast(list[position].namePerson)
+    }
+
+    override fun onDeleteClick(position: Int) {
+        val db = AppDatabase(requireContext())
+        db.birthdayUserDao().deleteBirthday(
+                Birthday(idBirthday = list[position].idBirthday,
+                        namePerson = list[position].namePerson,
+                        date = list[position].date)
+        )
+
+        setHasOptionsMenu(true)
+
+        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewBirthdays)
+        val imageView: ImageView = requireView().findViewById(R.id.imageViewBirthdays)
+
+        list = db.birthdayUserDao().getAllBirthday()
+
+        if (list.count() > 0) {
+            eventRecyclerView.adapter = BirthdaysCustomRecyclerAdapter(list, this)
+            imageView.visibility = View.GONE
+        } else {
+            imageView.visibility = View.VISIBLE
+            eventRecyclerView.visibility = View.GONE
+
+            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
+        }
+
+        toast(getString(R.string.record_removed))
     }
 }

@@ -14,7 +14,6 @@
             android:id="@+id/textViewLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:text="Title"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -23,19 +22,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/textViewLarge"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="35dp"
             android:text="Description"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ImageView
-            android:id="@+id/imageViewRV"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="5dp"
             android:src="@drawable/ic_baseline_delete_24" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

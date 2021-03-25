@@ -24,20 +24,20 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
     lateinit var list: List<Holiday>
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
 
         holidayViewModel =
-            ViewModelProvider(this).get(EventViewModel::class.java)
+                ViewModelProvider(this).get(EventViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_holidays, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         setHasOptionsMenu(true)
 
         val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewHolidays)
@@ -73,5 +73,37 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
 
     override fun onItemClick(position: Int) {
         toast(list[position].description)
+    }
+
+    override fun onDeleteClick(position: Int) {
+        val db = AppDatabase(requireContext())
+
+        db.holidayUserDao().deleteHoliday(
+                Holiday(idHoliday = list[position].idHoliday,
+                        title = list[position].title,
+                        description = list[position].description,
+                        date = list[position].date)
+        )
+
+        setHasOptionsMenu(true)
+
+        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewHolidays)
+        val imageView: ImageView = requireView().findViewById(R.id.imageViewHolidays)
+
+        eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        list = db.holidayUserDao().getAllHolidays()
+
+        if (list.count() > 0) {
+            eventRecyclerView.adapter = HolidaysCustomRecycleAdapter(list, this)
+            imageView.visibility = View.GONE
+        } else {
+            imageView.visibility = View.VISIBLE
+            eventRecyclerView.visibility = View.GONE
+
+            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
+        }
+
+        toast(getString(R.string.record_removed))
     }
 }
