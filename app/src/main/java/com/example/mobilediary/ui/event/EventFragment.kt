@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
 import com.example.mobilediary.SettingsActivity
@@ -18,7 +17,6 @@ import com.example.mobilediary.toast
 import com.example.mobilediary.ui.adapters.EventsCustomRecyclerAdapter
 
 class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListener {
-    private lateinit var eventViewModel: EventViewModel
     lateinit var list: List<Event>
 
     override fun onCreateView(
@@ -28,32 +26,13 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
     ): View? {
         setHasOptionsMenu(true)
 
-        eventViewModel =
-            ViewModelProvider(this).get(EventViewModel::class.java)
-
         return inflater.inflate(R.layout.fragment_events, container, false)
     }
 
     override fun onStart() {
         super.onStart()
-        setHasOptionsMenu(true)
 
-        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewEvents)
-        val imageView: ImageView = requireView().findViewById(R.id.imageView1)
-
-        val db = AppDatabase(requireContext())
-
-        list = db.eventUserDao().getAllEvents()
-
-        if (list.count() > 0) {
-            eventRecyclerView.adapter = EventsCustomRecyclerAdapter(list, this)
-            imageView.visibility = View.GONE
-        } else {
-            imageView.visibility = View.VISIBLE
-            eventRecyclerView.visibility = View.GONE
-
-            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
-        }
+        fillRecycleView(AppDatabase(requireContext()))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -79,15 +58,22 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
                         date = list[position].date)
         )
 
+        fillRecycleView(db)
+
+        toast(getString(R.string.record_removed))
+    }
+
+    private fun fillRecycleView(database: AppDatabase) {
         setHasOptionsMenu(true)
 
         val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewEvents)
         val imageView: ImageView = requireView().findViewById(R.id.imageView1)
 
-        list = db.eventUserDao().getAllEvents()
+        list = database.eventUserDao().getAllEvents()
 
         if (list.count() > 0) {
             eventRecyclerView.adapter = EventsCustomRecyclerAdapter(list, this)
+            eventRecyclerView.visibility = View.VISIBLE
             imageView.visibility = View.GONE
         } else {
             imageView.visibility = View.VISIBLE
@@ -95,7 +81,5 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
 
             imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
         }
-
-        toast(getString(R.string.record_removed))
     }
 }

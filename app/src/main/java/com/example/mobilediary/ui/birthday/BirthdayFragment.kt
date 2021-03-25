@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilediary.R
 import com.example.mobilediary.SettingsActivity
@@ -36,27 +35,8 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
 
     override fun onStart() {
         super.onStart()
-        setHasOptionsMenu(true)
 
-        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewBirthdays)
-        val imageView: ImageView = requireView().findViewById(R.id.imageViewBirthdays)
-
-        eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        val db = AppDatabase(requireContext())
-
-        list = db.birthdayUserDao().getAllBirthday()
-
-        if (list.count() > 0) {
-            eventRecyclerView.adapter = BirthdaysCustomRecyclerAdapter(list, this)
-            imageView.visibility = View.GONE
-        }
-        else{
-            imageView.visibility = View.VISIBLE
-            eventRecyclerView.visibility = View.GONE
-
-            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
-        }
+        fillRecycleView(AppDatabase(requireContext()))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -81,15 +61,22 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
                         date = list[position].date)
         )
 
+        fillRecycleView(db)
+
+        toast(getString(R.string.record_removed))
+    }
+
+    private fun fillRecycleView(database: AppDatabase) {
         setHasOptionsMenu(true)
 
         val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewBirthdays)
         val imageView: ImageView = requireView().findViewById(R.id.imageViewBirthdays)
 
-        list = db.birthdayUserDao().getAllBirthday()
+        list = database.birthdayUserDao().getAllBirthday()
 
         if (list.count() > 0) {
             eventRecyclerView.adapter = BirthdaysCustomRecyclerAdapter(list, this)
+            eventRecyclerView.visibility = View.VISIBLE
             imageView.visibility = View.GONE
         } else {
             imageView.visibility = View.VISIBLE
@@ -97,7 +84,5 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
 
             imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
         }
-
-        toast(getString(R.string.record_removed))
     }
 }

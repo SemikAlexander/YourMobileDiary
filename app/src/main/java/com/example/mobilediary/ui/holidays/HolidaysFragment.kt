@@ -38,27 +38,8 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
 
     override fun onStart() {
         super.onStart()
-        setHasOptionsMenu(true)
 
-        val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewHolidays)
-        val imageView: ImageView = requireView().findViewById(R.id.imageViewHolidays)
-
-        eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        val db = AppDatabase(requireContext())
-
-        list = db.holidayUserDao().getAllHolidays()
-
-        if (list.count() > 0) {
-            eventRecyclerView.adapter = HolidaysCustomRecycleAdapter(list, this)
-            imageView.visibility = View.GONE
-        }
-        else{
-            imageView.visibility = View.VISIBLE
-            eventRecyclerView.visibility = View.GONE
-
-            imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
-        }
+        fillRecycleView(AppDatabase(requireContext()))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -85,6 +66,12 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
                         date = list[position].date)
         )
 
+        fillRecycleView(db)
+
+        toast(getString(R.string.record_removed))
+    }
+
+    private fun fillRecycleView(database: AppDatabase) {
         setHasOptionsMenu(true)
 
         val eventRecyclerView: RecyclerView = requireView().findViewById(R.id.recycleViewHolidays)
@@ -92,10 +79,11 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
 
         eventRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        list = db.holidayUserDao().getAllHolidays()
+        list = database.holidayUserDao().getAllHolidays()
 
         if (list.count() > 0) {
             eventRecyclerView.adapter = HolidaysCustomRecycleAdapter(list, this)
+            eventRecyclerView.visibility = View.VISIBLE
             imageView.visibility = View.GONE
         } else {
             imageView.visibility = View.VISIBLE
@@ -103,7 +91,5 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
 
             imageView.setImageResource(R.drawable.ic_baseline_inbox_24)
         }
-
-        toast(getString(R.string.record_removed))
     }
 }
