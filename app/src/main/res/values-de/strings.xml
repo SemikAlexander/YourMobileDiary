@@ -36,4 +36,5 @@
     <string name="name_app">Mobiles Tagebuch</string>
     <string name="description_app">Verlieren Sie nicht wichtige Momente!</string>
     <string name="record_removed">Rekord wurde entfernt!</string>
+    <string name="record_updated">Rekord wurde aktualisiert!</string>
 </resources>

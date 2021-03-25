@@ -9,12 +9,9 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobilediary.R
-import com.example.mobilediary.SettingsActivity
+import com.example.mobilediary.*
 import com.example.mobilediary.database.AppDatabase
 import com.example.mobilediary.database.Birthday
-import com.example.mobilediary.startActivity
-import com.example.mobilediary.toast
 import com.example.mobilediary.ui.adapters.BirthdaysCustomRecyclerAdapter
 
 class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickListener {
@@ -50,7 +47,10 @@ class BirthdayFragment : Fragment(), BirthdaysCustomRecyclerAdapter.OnItemClickL
     }
 
     override fun onItemClick(position: Int) {
-        toast(list[position].namePerson)
+        startActivity<EventActivity> {
+            putExtra("intent_entity", "birthday")
+            putExtra("id_record", list[position].idBirthday)
+        }
     }
 
     override fun onDeleteClick(position: Int) {

@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobilediary.R
-import com.example.mobilediary.SettingsActivity
+import com.example.mobilediary.*
 import com.example.mobilediary.database.AppDatabase
 import com.example.mobilediary.database.Event
-import com.example.mobilediary.startActivity
-import com.example.mobilediary.toast
 import com.example.mobilediary.ui.adapters.EventsCustomRecyclerAdapter
 
 class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListener {
@@ -46,7 +43,10 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
     }
 
     override fun onItemClick(position: Int) {
-        toast(list[position].description)
+        startActivity<EventActivity> {
+            putExtra("intent_entity", "event")
+            putExtra("id_record", list[position].idEvent)
+        }
     }
 
     override fun onDeleteClick(position: Int) {
@@ -83,3 +83,9 @@ class EventFragment : Fragment(), EventsCustomRecyclerAdapter.OnItemClickListene
         }
     }
 }
+
+/*
+*   Передаём в класс EventActivity:
+* 1. Название таблицы
+* 2. Id записи
+* */

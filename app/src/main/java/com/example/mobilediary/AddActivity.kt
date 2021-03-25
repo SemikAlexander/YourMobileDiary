@@ -2,11 +2,13 @@ package com.example.mobilediary
 
 import android.app.DatePickerDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mobilediary.database.AppDatabase
 import com.example.mobilediary.database.Birthday
 import com.example.mobilediary.database.Event
@@ -48,7 +50,10 @@ class AddActivity : AppCompatActivity() {
         val keys = map.keys
 
         binding.apply {
-            eventSpinner.adapter = ArrayAdapter(this@AddActivity, R.layout.spinner_item, keys.toMutableList())
+            setSupportActionBar(toolbarEventActivity)
+
+            eventSpinner.adapter =
+                    ArrayAdapter(this@AddActivity, R.layout.spinner_item, keys.toMutableList())
             eventSpinner.setSelection(0)
 
             eventSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -91,50 +96,67 @@ class AddActivity : AppCompatActivity() {
                         dateAndTime.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
+        }
+    }
 
-            saveButton.setOnClickListener {
-                val db = AppDatabase(this@AddActivity)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_add_activity, menu)
+        return true
+    }
 
-                val dateToUnix = SimpleDateFormat("dd.MM.yyyy").parse(dateTextView.text.toString())
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add -> {
+                binding.apply {
+                    val db = AppDatabase(this@AddActivity)
 
-                var unixtime = dateToUnix.time / 1000
+                    val dateToUnix =
+                            SimpleDateFormat("dd.MM.yyyy").parse(dateTextView.text.toString())
 
-                when (eventSpinner.selectedItemPosition) {
-                    0 -> {
-                        db.eventUserDao().insertEvent(
-                                Event(
-                                        title = titleEditText.text.toString(),
-                                        description =  descriptionEditText.text.toString(),
-                                        date = unixtime
+                    val unixtime = dateToUnix.time / 1000
+
+                    if (titleEditText.text.toString().trim().isNotEmpty() or
+                            descriptionEditText.text.toString().trim().isNotEmpty()
+                    ) {
+                        when (eventSpinner.selectedItemPosition) {
+                            0 -> {
+                                db.eventUserDao().insertEvent(
+                                        Event(
+                                                title = titleEditText.text.toString(),
+                                                description = descriptionEditText.text.toString(),
+                                                date = unixtime
+                                        )
                                 )
-                        )
-                    }
-                    1 -> {
-                        db.holidayUserDao().insertHoliday(
-                                Holiday(
-                                        title = titleEditText.text.toString(),
-                                        description =  descriptionEditText.text.toString(),
-                                        date = unixtime
+                            }
+                            1 -> {
+                                db.holidayUserDao().insertHoliday(
+                                        Holiday(
+                                                title = titleEditText.text.toString(),
+                                                description = descriptionEditText.text.toString(),
+                                                date = unixtime
+                                        )
                                 )
-                        )
-                    }
-                    2 -> {
-                        db.birthdayUserDao().insertBirthday(
-                                Birthday(
-                                        namePerson = titleEditText.text.toString(),
-                                        date = unixtime
+                            }
+                            2 -> {
+                                db.birthdayUserDao().insertBirthday(
+                                        Birthday(
+                                                namePerson = titleEditText.text.toString(),
+                                                date = unixtime
+                                        )
                                 )
-                        )
+                            }
+                        }
                     }
+                    titleEditText.text.clear()
+                    descriptionEditText.text.clear()
+                    dateTextView.text = sdf.format(Date())
+
+                    toast(getString(R.string.record_added))
                 }
-
-                titleEditText.text.clear()
-                descriptionEditText.text.clear()
-                dateTextView.text = sdf.format(Date())
-
-                toast(getString(R.string.record_added))
+                return true
             }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setLocale(context: Context, locale: String) {

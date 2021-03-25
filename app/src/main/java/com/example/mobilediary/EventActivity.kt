@@ -6,13 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mobilediary.database.AppDatabase
-import com.example.mobilediary.database.Birthday
-import com.example.mobilediary.database.Event
-import com.example.mobilediary.database.Holiday
 import com.example.mobilediary.databinding.ActivityEventBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,35 +47,36 @@ class EventActivity : AppCompatActivity() {
         val keys = map.keys
 
         binding.apply {
+            val db = AppDatabase(this@EventActivity)
+
             setSupportActionBar(toolbarEventActivity)
 
-            eventSpinner.adapter =
-                ArrayAdapter(this@EventActivity, R.layout.spinner_item, keys.toMutableList())
-            eventSpinner.setSelection(0)
+            when (intent.getStringExtra("intent_entity")) {
+                "event" -> {
+                    eventSpinner.setSelection(0)
 
-            eventSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+                    val event = db.eventUserDao().getEvent(intent.getLongExtra("id_record", 0))
+                    titleEditText.setText(event.title)
+                    descriptionEditText.setText(event.description)
+                    dateTextView.text = sdf.format(Date(event.date * 1000))
+                }
+                "holiday" -> {
+                    eventSpinner.setSelection(1)
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when {
-                        values[position] == "birthday" -> {
-                            descriptionEditText.visibility = View.GONE
-                            titleEditText.hint = getString(R.string.name_person_hint)
-                        }
-                        else -> {
-                            descriptionEditText.visibility = View.VISIBLE
-                            titleEditText.hint = getString(R.string.title_hint)
-                        }
-                    }
+                    val holiday = db.holidayUserDao().getHoliday(intent.getLongExtra("id_record", 0))
+                    titleEditText.setText(holiday.title)
+                    descriptionEditText.setText(holiday.description)
+                    dateTextView.text = sdf.format(Date(holiday.date * 1000))
+                }
+                "birthday" -> {
+                    eventSpinner.setSelection(2)
+
+                    val birthday = db.birthdayUserDao().getBirthday(intent.getLongExtra("id_record", 0))
+                    titleEditText.setText(birthday.namePerson)
+                    dateTextView.text = sdf.format(Date(birthday.date * 1000))
+                    descriptionEditText.visibility = View.GONE
                 }
             }
-
-            dateTextView.text = sdf.format(Date())
 
             val d = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 dateAndTime[Calendar.YEAR] = year
@@ -92,10 +88,10 @@ class EventActivity : AppCompatActivity() {
 
             dateTextView.setOnClickListener {
                 DatePickerDialog(
-                    this@EventActivity, d,
-                    dateAndTime.get(Calendar.YEAR),
-                    dateAndTime.get(Calendar.MONTH),
-                    dateAndTime.get(Calendar.DAY_OF_MONTH)
+                        this@EventActivity, d,
+                        dateAndTime.get(Calendar.YEAR),
+                        dateAndTime.get(Calendar.MONTH),
+                        dateAndTime.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
         }
@@ -108,54 +104,38 @@ class EventActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_save -> {
+            R.id.action_update -> {
                 binding.apply {
                     val db = AppDatabase(this@EventActivity)
 
-                    val dateToUnix =
-                        SimpleDateFormat("dd.MM.yyyy").parse(dateTextView.text.toString())
-
+                    val dateToUnix = sdf.parse(dateTextView.text.toString())
                     val unixtime = dateToUnix.time / 1000
 
-                    if (titleEditText.text.toString().trim().isNotEmpty() or
-                        descriptionEditText.text.toString().trim().isNotEmpty()
-                    ) {
-                        when (eventSpinner.selectedItemPosition) {
-                            0 -> {
-                                db.eventUserDao().insertEvent(
-                                    Event(
-                                        title = titleEditText.text.toString(),
-                                        description = descriptionEditText.text.toString(),
-                                        date = unixtime
-                                    )
-                                )
-                            }
-                            1 -> {
-                                db.holidayUserDao().insertHoliday(
-                                    Holiday(
-                                        title = titleEditText.text.toString(),
-                                        description = descriptionEditText.text.toString(),
-                                        date = unixtime
-                                    )
-                                )
-                            }
-                            2 -> {
-                                db.birthdayUserDao().insertBirthday(
-                                    Birthday(
-                                        namePerson = titleEditText.text.toString(),
-                                        date = unixtime
-                                    )
-                                )
-                            }
+                    when (intent.getStringExtra("intent_entity")) {
+                        "event" -> {
+                            db.eventUserDao().update(
+                                    title = titleEditText.text.toString(),
+                                    description = descriptionEditText.text.toString(),
+                                    date = unixtime
+                            )
+                        }
+                        "holiday" -> {
+                            db.holidayUserDao().update(
+                                    title = titleEditText.text.toString(),
+                                    description = descriptionEditText.text.toString(),
+                                    date = unixtime
+                            )
+                        }
+                        "birthday" -> {
+                            db.birthdayUserDao().update(
+                                    namePerson = titleEditText.text.toString(),
+                                    date = unixtime
+                            )
                         }
                     }
-                    titleEditText.text.clear()
-                    descriptionEditText.text.clear()
-                    dateTextView.text = sdf.format(Date())
 
-                    toast(getString(R.string.record_added))
+                    toast(getString(R.string.record_updated))
                 }
-                return true
             }
         }
         return super.onOptionsItemSelected(item)

@@ -10,12 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobilediary.R
-import com.example.mobilediary.SettingsActivity
+import com.example.mobilediary.*
 import com.example.mobilediary.database.AppDatabase
 import com.example.mobilediary.database.Holiday
-import com.example.mobilediary.startActivity
-import com.example.mobilediary.toast
 import com.example.mobilediary.ui.adapters.HolidaysCustomRecycleAdapter
 import com.example.mobilediary.ui.event.EventViewModel
 
@@ -53,7 +50,10 @@ class HolidaysFragment : Fragment(), HolidaysCustomRecycleAdapter.OnItemClickLis
     }
 
     override fun onItemClick(position: Int) {
-        toast(list[position].description)
+        startActivity<EventActivity> {
+            putExtra("intent_entity", "holiday")
+            putExtra("id_record", list[position].idHoliday)
+        }
     }
 
     override fun onDeleteClick(position: Int) {

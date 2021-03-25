@@ -35,4 +35,5 @@
     </string-array>
     <string name="description_app">Don\'t waste important moments!</string>
     <string name="record_removed">Record was removed!</string>
+    <string name="record_updated">Record was updated!</string>
 </resources>
