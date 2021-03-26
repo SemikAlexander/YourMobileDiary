@@ -115,36 +115,42 @@ class AddActivity : AppCompatActivity() {
 
                     val unixtime = dateToUnix.time / 1000
 
-                    if (titleEditText.text.toString().trim().isNotEmpty() or
-                            descriptionEditText.text.toString().trim().isNotEmpty()
-                    ) {
-                        when (eventSpinner.selectedItemPosition) {
-                            0 -> {
-                                db.eventUserDao().insertEvent(
-                                        Event(
-                                                title = titleEditText.text.toString(),
-                                                description = descriptionEditText.text.toString(),
-                                                date = unixtime
-                                        )
-                                )
-                            }
-                            1 -> {
-                                db.holidayUserDao().insertHoliday(
-                                        Holiday(
-                                                title = titleEditText.text.toString(),
-                                                description = descriptionEditText.text.toString(),
-                                                date = unixtime
-                                        )
-                                )
-                            }
-                            2 -> {
-                                db.birthdayUserDao().insertBirthday(
-                                        Birthday(
-                                                namePerson = titleEditText.text.toString(),
-                                                date = unixtime
-                                        )
-                                )
-                            }
+                    when (eventSpinner.selectedItemPosition) {
+                        0 -> {
+                            db.eventUserDao().insertEvent(
+                                    Event(
+                                            title = if (titleEditText.text.toString().trim().isNotEmpty())
+                                                titleEditText.text.toString()
+                                            else getString(R.string.empty_title),
+                                            description = if (descriptionEditText.text.toString().trim().isNotEmpty())
+                                                descriptionEditText.text.toString()
+                                            else getString(R.string.empty_description),
+                                            date = unixtime
+                                    )
+                            )
+                        }
+                        1 -> {
+                            db.holidayUserDao().insertHoliday(
+                                    Holiday(
+                                            title = if (titleEditText.text.toString().trim().isNotEmpty())
+                                                titleEditText.text.toString()
+                                            else getString(R.string.empty_title),
+                                            description = if (descriptionEditText.text.toString().trim().isNotEmpty())
+                                                descriptionEditText.text.toString()
+                                            else getString(R.string.empty_description),
+                                            date = unixtime
+                                    )
+                            )
+                        }
+                        2 -> {
+                            db.birthdayUserDao().insertBirthday(
+                                    Birthday(
+                                            namePerson = if (titleEditText.text.toString().trim().isNotEmpty())
+                                                titleEditText.text.toString()
+                                            else getString(R.string.empty_title),
+                                            date = unixtime
+                                    )
+                            )
                         }
                     }
                     titleEditText.text.clear()

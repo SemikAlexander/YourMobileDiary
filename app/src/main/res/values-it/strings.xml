@@ -36,4 +36,7 @@
     <string name="description_app">Non perdere momenti importanti!</string>
     <string name="record_removed">Record è stato rimosso!</string>
     <string name="record_updated">Record è stato aggiornato!</string>
+    <string name="empty_title">Nessun titolo</string>
+    <string name="empty_description">Nessuna descrizione</string>
+    <string name="empty_name_person">Nessun nome</string>
 </resources>

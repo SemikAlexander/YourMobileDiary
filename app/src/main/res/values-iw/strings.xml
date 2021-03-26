@@ -36,4 +36,7 @@
     <string name="description_app">אל תבזבזו רגעים חשובים!</string>
     <string name="record_removed">השיא הוסר!</string>
     <string name="record_updated">השיא עודכן!</string>
+    <string name="empty_title">אין כותרת</string>
+    <string name="empty_description">אין תיאור</string>
+    <string name="empty_name_person">אין שם</string>
 </resources>

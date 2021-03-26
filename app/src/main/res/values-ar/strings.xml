@@ -36,4 +36,7 @@
     <string name="description_app">لا تضيع لحظات هامة!</string>
     <string name="record_removed">تمت إزالة السجل!</string>
     <string name="record_updated">تم تحديث السجل!</string>
+    <string name="empty_title">لا عنوان</string>
+    <string name="empty_description">لا وصف</string>
+    <string name="empty_name_person">لا اسم</string>
 </resources>
